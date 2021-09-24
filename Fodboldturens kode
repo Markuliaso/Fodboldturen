@@ -1,0 +1,43 @@
+import pickle
+
+filename = 'betalinger.pk'
+
+fodboldtur ={}
+
+personer =['Hans Hansen', 'Klaus Klausen']
+
+def afslut():
+    outfile = open(filename, 'wb')
+    pickle.dump(fodboldtur, outfile)
+    outfile.close()
+    print("Programmet er afsluttet!")
+
+def printliste():
+    for item in fodboldtur.items():
+        print(item)
+    menu()
+
+def betal():
+    person = int(input("vælg person"))
+    print(personer[person])
+    x = int(input("indtast betalt beløb"))
+    fodboldtur[personer] =fodboldtur.get(personer) + x
+    printliste()
+
+def menu():
+    print("MENU")
+    print("1: Print liste")
+    print("2: Betaling")
+    print("3: Afslut program")
+    valg = input("Indtast dit valg:")
+    if (valg == '1'):
+        printliste()
+    if (valg =='2'):
+        betal()
+    if (valg == '3'):
+        afslut()
+
+infile = open(filename,'rb')
+fodboldtur = pickle.load(infile)
+infile.close()
+menu()
